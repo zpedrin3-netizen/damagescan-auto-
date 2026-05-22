@@ -1,7 +1,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Damage, Inspection } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY || '' });
 
 const inspectionSchema = {
   type: Type.OBJECT,
@@ -28,7 +28,7 @@ const inspectionSchema = {
 };
 
 export async function analyzeVehicleImage(base64Image: string): Promise<Partial<Inspection>> {
-  if (!process.env.GEMINI_API_KEY) {
+  if (!import.meta.env.VITE_GEMINI_API_KEY) {
     throw new Error("GEMINI_API_KEY is not configured");
   }
 
